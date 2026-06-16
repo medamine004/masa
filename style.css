@@ -1,0 +1,331 @@
+/* =========================================
+   Design tokens
+   ========================================= */
+:root{
+  --bg-deep:      #160B2B;
+  --bg-deep-2:    #1F1140;
+  --gold:         #FFD66B;
+  --heart-pink:   #FF5C8A;
+  --heart-pink-2: #FF8FAE;
+  --lilac:        #C9A6FF;
+  --cream:        #FDF6F0;
+  --cream-dim:    rgba(253,246,240,0.6);
+
+  --radius-lg: 28px;
+  --radius-md: 18px;
+
+  --shadow-soft: 0 20px 60px rgba(10,4,30,0.55);
+}
+
+*{ box-sizing: border-box; }
+
+html, body{
+  margin:0;
+  padding:0;
+  height:100%;
+  overflow:hidden;
+  background: radial-gradient(ellipse 120% 80% at 50% -10%, var(--bg-deep-2), var(--bg-deep) 60%);
+  color: var(--cream);
+  font-family:'Tajawal', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app{
+  position:relative;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:2;
+}
+
+/* =========================================
+   Starfield background
+   ========================================= */
+#sky{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,0.9), transparent),
+    radial-gradient(2px 2px at 80% 10%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1.5px 1.5px at 30% 70%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1.5px 1.5px at 60% 85%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(2px 2px at 90% 60%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 45% 35%, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1.5px 1.5px at 15% 55%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(2px 2px at 70% 40%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 95% 85%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1.5px 1.5px at 25% 90%, rgba(255,255,255,0.5), transparent);
+  background-size: 100% 100%;
+  animation: twinkle 6s ease-in-out infinite alternate;
+}
+@keyframes twinkle{
+  0%{ opacity:0.6; }
+  100%{ opacity:1; }
+}
+
+/* =========================================
+   Screens
+   ========================================= */
+.screen{
+  position:absolute;
+  inset:0;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding: 24px;
+  text-align:center;
+}
+.screen.active{ display:flex; }
+
+/* =========================================
+   Typography
+   ========================================= */
+.brush-title{
+  font-family:'Lalezar', cursive;
+  font-size: clamp(2.4rem, 9vw, 3.4rem);
+  color: var(--heart-pink-2);
+  text-shadow: 0 0 18px rgba(255,92,138,0.55), 0 4px 0 rgba(0,0,0,0.2);
+  margin: 0 0 6px 0;
+  line-height:1.15;
+}
+.brush-title.small{ font-size: clamp(1.6rem, 6vw, 2.1rem); margin-bottom:14px; }
+
+.subtitle{
+  font-size: 0.98rem;
+  color: var(--cream-dim);
+  margin: 0 0 28px 0;
+  font-weight:300;
+}
+
+.hint{
+  margin-top: 26px;
+  font-size: 0.82rem;
+  color: var(--cream-dim);
+  max-width: 280px;
+  line-height:1.7;
+}
+
+/* =========================================
+   Start screen heart loader
+   ========================================= */
+.heart-loader{
+  width: 86px;
+  height: 78px;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 0 22px rgba(255,92,138,0.65));
+  animation: heartbeat 1.4s ease-in-out infinite;
+}
+.heart-svg{ width:100%; height:100%; }
+.heart-svg path{ fill: var(--heart-pink); }
+@keyframes heartbeat{
+  0%, 100%{ transform: scale(1); }
+  15%{ transform: scale(1.12); }
+  30%{ transform: scale(0.98); }
+  45%{ transform: scale(1.08); }
+  60%{ transform: scale(1); }
+}
+
+/* =========================================
+   Primary button
+   ========================================= */
+.btn-primary{
+  appearance:none;
+  border:none;
+  cursor:pointer;
+  font-family:'Tajawal', sans-serif;
+  font-weight:700;
+  font-size: 1.02rem;
+  color: var(--bg-deep);
+  background: linear-gradient(135deg, var(--gold), #FFC23E);
+  padding: 15px 38px;
+  border-radius: 999px;
+  box-shadow: 0 12px 28px rgba(255,198,62,0.35), 0 0 0 1px rgba(255,255,255,0.15) inset;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 16px 34px rgba(255,198,62,0.45); }
+.btn-primary:active{ transform: translateY(0px) scale(0.97); }
+
+/* =========================================
+   HUD
+   ========================================= */
+.hud{
+  position:absolute;
+  top: 18px;
+  left: 18px;
+  right: 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:5;
+  font-family:'Tajawal', sans-serif;
+}
+.hud-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 8px 16px;
+  backdrop-filter: blur(6px);
+}
+.hud-label{
+  font-size: 0.68rem;
+  color: var(--cream-dim);
+  letter-spacing: 0.5px;
+}
+.hud-value{
+  font-family:'Lalezar', cursive;
+  font-size: 1.4rem;
+  color: var(--gold);
+}
+.lives-track{ display:flex; gap:5px; }
+.life-pip{
+  width:14px; height:13px;
+  display:inline-block;
+  background: var(--heart-pink);
+  clip-path: path('M7 12.5C7 12.5 0.7 8.6 0.7 4.3C0.7 2 2.4 0.4 4.4 0.4C5.8 0.4 6.6 1.2 7 2.1C7.4 1.2 8.2 0.4 9.6 0.4C11.6 0.4 13.3 2 13.3 4.3C13.3 8.6 7 12.5 7 12.5Z');
+  filter: drop-shadow(0 0 4px rgba(255,92,138,0.6));
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.life-pip.lost{ opacity:0.18; transform: scale(0.8); }
+
+/* =========================================
+   Game board
+   ========================================= */
+#screen-game{ justify-content: flex-start; padding-top: 78px; gap: 14px; }
+
+#board-wrap{
+  position:relative;
+  width: min(92vw, 420px);
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: var(--shadow-soft), 0 0 0 1px rgba(255,255,255,0.03) inset;
+  overflow:hidden;
+}
+#board{
+  width:100%;
+  height:100%;
+  display:block;
+  touch-action:none;
+}
+
+.message-pop{
+  position:absolute;
+  top:50%; left:50%;
+  transform: translate(-50%,-50%) scale(0.85);
+  background: rgba(22,11,43,0.92);
+  border: 1px solid rgba(255,214,107,0.4);
+  color: var(--cream);
+  font-size: 1.05rem;
+  font-weight:500;
+  padding: 16px 22px;
+  border-radius: var(--radius-md);
+  max-width: 78%;
+  text-align:center;
+  line-height:1.6;
+  opacity:0;
+  pointer-events:none;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index:8;
+}
+.message-pop.show{
+  opacity:1;
+  transform: translate(-50%,-50%) scale(1);
+}
+
+.pause-overlay{
+  position:absolute;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background: rgba(15,8,28,0.72);
+  font-size:1.1rem;
+  color: var(--cream);
+  z-index:9;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+}
+.pause-overlay.show{ display:flex; }
+
+/* =========================================
+   Touch controls
+   ========================================= */
+#touch-controls{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  margin-top: 6px;
+}
+.dpad-row{ display:flex; gap: 54px; }
+.dpad-btn{
+  width:52px; height:52px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.07);
+  color: var(--cream);
+  font-size:1.1rem;
+  backdrop-filter: blur(4px);
+  cursor:pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.dpad-btn:active{ background: rgba(255,214,107,0.25); transform: scale(0.92); }
+
+@media (min-width: 760px){
+  #touch-controls{ display:none; }
+}
+
+/* =========================================
+   End screen / letter
+   ========================================= */
+.letter-card{
+  max-width: 460px;
+  width: 100%;
+  background: linear-gradient(165deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,214,107,0.25);
+  border-radius: var(--radius-lg);
+  padding: 36px 30px 32px;
+  box-shadow: var(--shadow-soft);
+  position:relative;
+}
+.letter-heart{
+  width:52px; height:48px;
+  margin: 0 auto 14px;
+  filter: drop-shadow(0 0 16px rgba(255,92,138,0.6));
+}
+.end-score{
+  font-size:0.92rem;
+  color: var(--gold);
+  margin: 0 0 18px 0;
+  font-weight:500;
+}
+.letter-text{
+  font-size: 1rem;
+  line-height: 2;
+  color: var(--cream);
+  margin: 0 0 26px 0;
+  white-space: pre-line;
+}
+.letter-actions{ display:flex; justify-content:center; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  #sky, .heart-loader{ animation: none; }
+  .btn-primary, .message-pop, .pause-overlay{ transition:none; }
+}
+
+/* Focus visibility for accessibility */
+button:focus-visible{
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}

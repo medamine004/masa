@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>قلبي يلاحقك 💌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="sky"></div>
+
+  <main id="app">
+
+    <!-- شاشة البداية -->
+    <section id="screen-start" class="screen active">
+      <div class="title-wrap">
+        <h1 class="brush-title">قلبي يلاحقك MASA</h1>
+        <p class="subtitle">لعبة صغيرة... برسالة كبيرة</p>
+      </div>
+
+      <div class="heart-loader" aria-hidden="true">
+        <svg viewBox="0 0 32 29" class="heart-svg">
+          <path d="M16 28.5C16 28.5 1.5 19.8 1.5 9.8C1.5 4.6 5.4 1 9.9 1C13 1 15 2.7 16 4.7C17 2.7 19 1 22.1 1C26.6 1 30.5 4.6 30.5 9.8C30.5 19.8 16 28.5 16 28.5Z"/>
+        </svg>
+      </div>
+
+      <button id="btn-start" class="btn-primary">يلا نلعب 🤍</button>
+
+      <p class="hint">حرّك بالأسهم أو اسحب بإصبعك — جمّع النجوم 🌟 لقلبي</p>
+    </section>
+
+    <!-- شاشة اللعب -->
+    <section id="screen-game" class="screen">
+      <header class="hud">
+        <div class="hud-item">
+          <span class="hud-label">النجوم</span>
+          <span id="score" class="hud-value">0</span>
+        </div>
+        <div class="hud-item hud-hearts">
+          <span class="hud-label">القلب</span>
+          <div id="lives" class="lives-track">
+            <span class="life-pip"></span>
+            <span class="life-pip"></span>
+            <span class="life-pip"></span>
+          </div>
+        </div>
+      </header>
+
+      <div id="board-wrap">
+        <canvas id="board"></canvas>
+        <div id="message-pop" class="message-pop" aria-live="polite"></div>
+        <div id="pause-overlay" class="pause-overlay">
+          <p>اضغط للمتابعة 🤍</p>
+        </div>
+      </div>
+
+      <div id="touch-controls" aria-hidden="true">
+        <button class="dpad-btn" data-dir="up">▲</button>
+        <div class="dpad-row">
+          <button class="dpad-btn" data-dir="right">▶️</button>
+          <button class="dpad-btn" data-dir="left">◀️</button>
+        </div>
+        <button class="dpad-btn" data-dir="down">▼</button>
+      </div>
+    </section>
+
+    <!-- شاشة الرسالة النهائية -->
+    <section id="screen-end" class="screen">
+      <div class="letter-card">
+        <div class="letter-heart" aria-hidden="true">
+          <svg viewBox="0 0 32 29" class="heart-svg">
+            <path d="M16 28.5C16 28.5 1.5 19.8 1.5 9.8C1.5 4.6 5.4 1 9.9 1C13 1 15 2.7 16 4.7C17 2.7 19 1 22.1 1C26.6 1 30.5 4.6 30.5 9.8C30.5 19.8 16 28.5 16 28.5Z"/>
+          </svg>
+        </div>
+        <h2 id="end-title" class="brush-title small">جمعت كل نجومي</h2>
+        <p id="end-score" class="end-score"></p>
+        <p id="letter-text" class="letter-text"></p>
+        <div class="letter-actions">
+          <button id="btn-replay" class="btn-primary">نلعب مرّة ثانية 🤍</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
